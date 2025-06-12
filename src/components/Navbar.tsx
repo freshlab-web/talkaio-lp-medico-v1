@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,6 +5,19 @@ import { Button } from '@/components/ui/button';
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // Função para scroll suave e evitar navegação errada
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const href = e.currentTarget.getAttribute("href");
+    if (href?.startsWith("#")) {
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        window.history.replaceState(null, "", href);
+      }
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,12 +36,12 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+    <div className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex items-center justify-between">
           <a href="#" className="z-50">
             <img
-              src="/lovable-uploads/fc743b2e-b47e-455c-a025-daf0e32c8796.png"
+              src="https://cdn.jsdelivr.net/gh/freshlab-web/talkaio-lp-medico@main/dist/lovable-uploads/fc743b2e-b47e-455c-a025-daf0e32c8796.png"
               alt="Talkaio Logo"
               className="h-10"
             />
@@ -37,20 +49,20 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#benefits" className="text-talkaio-dark hover:text-talkaio-blue font-medium transition-colors">
+            <a href="#benefits" onClick={handleAnchorClick} className="text-talkaio-dark hover:text-talkaio-blue font-medium transition-colors">
               Benefícios
             </a>
-            <a href="#audience" className="text-talkaio-dark hover:text-talkaio-blue font-medium transition-colors">
+            <a href="#audience" onClick={handleAnchorClick} className="text-talkaio-dark hover:text-talkaio-blue font-medium transition-colors">
               Para Quem
             </a>
-            <a href="#technology" className="text-talkaio-dark hover:text-talkaio-blue font-medium transition-colors">
+            <a href="#technology" onClick={handleAnchorClick} className="text-talkaio-dark hover:text-talkaio-blue font-medium transition-colors">
               Tecnologia
             </a>
-            <a href="#faq" className="text-talkaio-dark hover:text-talkaio-blue font-medium transition-colors">
+            <a href="#faq" onClick={handleAnchorClick} className="text-talkaio-dark hover:text-talkaio-blue font-medium transition-colors">
               FAQ
             </a>
             <Button className="bg-talkaio-blue hover:bg-talkaio-darkBlue text-white">
-              <a href="#contact">Fale Conosco</a>
+              <a href="#contact" onClick={handleAnchorClick}>Fale Conosco</a>
             </Button>
           </nav>
 
@@ -107,6 +119,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 }
