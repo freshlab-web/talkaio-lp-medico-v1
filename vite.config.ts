@@ -20,4 +20,13 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        entryFileNames: `assets/index-B5YTsUb3.js`,
+        chunkFileNames: `assets/[name]-B5YTsUb3.js`,
+        assetFileNames: `assets/[name]-BpNuLI0P[extname]`,
+      },
+    },
+ },
 }));
