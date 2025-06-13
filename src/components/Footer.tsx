@@ -74,7 +74,7 @@ export default function Footer() {
               <li className="flex items-start">
                 <Phone size={20} className="mr-3 mt-1 text-talkaio-blue" />
                 <a href="tel:+5511999999999" className="text-gray-300 hover:text-talkaio-blue transition-colors">
-                  (11) 99999-9999
+                  (11) 91825-7335
                 </a>
               </li>
               <li className="flex items-start">
